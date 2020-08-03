@@ -1,15 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="XFFirebaseLecture_Auth_Store.Views.LoginPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+<ContentPage
+    x:Class="XFFirebaseLecture_Auth_Store.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Margin="16,0">
+        <StackLayout
+            x:Name="loginStackLayout"
+            IsVisible="False"
+            VerticalOptions="Center">
+            <Entry Placeholder="Email" />
+            <Entry IsPassword="True" Placeholder="Password" />
+            <Button Text="Login" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Don't have an account?" />
+                <Label Style="{StaticResource accentLabel}" Text="Register">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="RegisterLabel_Tapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
         </StackLayout>
-    </ContentPage.Content>
+        <StackLayout
+            x:Name="registerStackLayout"
+            IsVisible="True"
+            VerticalOptions="Center">
+            <Entry Placeholder="Name" />
+            <Entry Placeholder="Email" />
+            <Entry IsPassword="True" Placeholder="Password" />
+            <Entry IsPassword="True" Placeholder="Confirm password" />
+            <Button Text="Register" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Already have an account?" />
+                <Label Style="{StaticResource accentLabel}" Text="Login" >
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="LoginLabel_Tapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
 </ContentPage>
