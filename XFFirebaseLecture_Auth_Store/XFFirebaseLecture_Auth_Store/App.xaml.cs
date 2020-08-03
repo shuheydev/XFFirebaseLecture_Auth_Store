@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XFFirebaseLecture_Auth_Store.Views;
 
 namespace XFFirebaseLecture_Auth_Store
 {
@@ -10,7 +11,7 @@ namespace XFFirebaseLecture_Auth_Store
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()
