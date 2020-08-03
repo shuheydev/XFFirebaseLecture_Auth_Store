@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "225938530904",
+    "firebase_url": "https://xffirebaselecture-auth-store.firebaseio.com",
+    "project_id": "xffirebaselecture-auth-store",
+    "storage_bucket": "xffirebaselecture-auth-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:225938530904:android:7eb91e99464eca7689202d",
+        "android_client_info": {
+          "package_name": "com.harusoft.xffirebaselecture_auth_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "225938530904-glbj2hu1jfb59r4g69b334og3ghc051m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDx4NaNuubofcvkth0qiQ4rWSdPI4UjIDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "225938530904-glbj2hu1jfb59r4g69b334og3ghc051m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
