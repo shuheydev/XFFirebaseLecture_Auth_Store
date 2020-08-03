@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using XFFirebaseLecture_Auth_Store.Models;
 
 namespace XFFirebaseLecture_Auth_Store
 {
@@ -16,6 +17,11 @@ namespace XFFirebaseLecture_Auth_Store
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
         }
     }
 }
