@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Android.App;
@@ -12,23 +13,50 @@ using Android.Widget;
 using Firebase.Auth;
 using XFFirebaseLecture_Auth_Store.ViewModels.Helpers;
 
+[assembly:Xamarin.Forms.Dependency(typeof(XFFirebaseLecture_Auth_Store.Droid.Dependencies.Auth))]
 namespace XFFirebaseLecture_Auth_Store.Droid.Dependencies
 {
     public class Auth : IAuth
     {
-        public Task<bool> AuthenticateUser(string email, string password)
+        public Auth()
         {
-            throw new NotImplementedException();
+
+        }
+
+        public async Task<bool> AuthenticateUser(string email, string password)
+        {
+            try
+            {
+                await Firebase.Auth.FirebaseAuth.Instance.SignInWithEmailAndPasswordAsync(email, password);
+
+                return true;
+            }
+            catch (FirebaseAuthWeakPasswordException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (FirebaseAuthInvalidCredentialsException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch(FirebaseAuthInvalidUserException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An unknown error occurred, please try again.");
+            }
         }
 
         public string GetCurrentUserId()
         {
-            throw new NotImplementedException();
+            return Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Uid;
         }
 
         public bool IsAuthenticated()
         {
-            throw new NotImplementedException();
+            return Firebase.Auth.FirebaseAuth.Instance.CurrentUser != null;
         }
 
         public async Task<bool> RegisterUser(string name, string email, string password)
@@ -46,9 +74,17 @@ namespace XFFirebaseLecture_Auth_Store.Droid.Dependencies
 
                 return true;
             }
-            catch(FirebaseAuthWeakPasswordException ex)
+            catch (FirebaseAuthWeakPasswordException ex)
             {
-                throw new Exception();
+                throw new Exception(ex.Message);
+            }
+            catch (FirebaseAuthUserCollisionException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An unknown error occurred, please try again.");
             }
         }
     }
