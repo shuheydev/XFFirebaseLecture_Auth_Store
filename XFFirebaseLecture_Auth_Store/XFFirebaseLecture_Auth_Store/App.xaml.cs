@@ -11,7 +11,7 @@ namespace XFFirebaseLecture_Auth_Store
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new SubscriptionPage());
+            MainPage = new NavigationPage(new SubscriptionsPage());
         }
 
         protected override void OnStart()

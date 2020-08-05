@@ -11,9 +11,9 @@ using XFFirebaseLecture_Auth_Store.ViewModels.Helpers;
 namespace XFFirebaseLecture_Auth_Store.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SubscriptionPage : ContentPage
+    public partial class SubscriptionsPage : ContentPage
     {
-        public SubscriptionPage()
+        public SubscriptionsPage()
         {
             InitializeComponent();
         }
@@ -27,6 +27,11 @@ namespace XFFirebaseLecture_Auth_Store.Views
                 await Task.Delay(300);
                 await Navigation.PushAsync(new LoginPage());
             }
+        }
+
+        private void ToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new NewSubscriptionPage());
         }
     }
 }

@@ -17,10 +17,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\SubscriptionsPage.xaml.cs">
+      <DependentUpon>SubscriptionsPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Views\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SubscriptionPage.xaml">
+    <EmbeddedResource Update="Views\NewSubscriptionPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SubscriptionsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
