@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 using XFFirebaseLecture_Auth_Store.Models;
 
 namespace XFFirebaseLecture_Auth_Store.ViewModels.Helpers
 {
-    public interface   IFirestore
+    public interface IFirestore
     {
-        Task<bool> InsertSubscription(Subscription subscription);
+        bool InsertSubscription(Subscription subscription);
         Task<bool> DeleteSubscription(Subscription subscription);
         Task<bool> UpdateSubscription(Subscription subscription);
         Task<IList<Subscription>> ReadSubscriptions();
@@ -17,24 +18,24 @@ namespace XFFirebaseLecture_Auth_Store.ViewModels.Helpers
 
     public class DatabaseHelper
     {
-        private static IFirestore firestore;
+        private static readonly IFirestore firestore = DependencyService.Get<IFirestore>();
 
-        public Task<bool> DeleteSubscription(Subscription subscription)
+        public static Task<bool> DeleteSubscription(Subscription subscription)
         {
             return firestore.DeleteSubscription(subscription);
         }
 
-        public bool InsertSubscription(Subscription subscription)
+        public static bool InsertSubscription(Subscription subscription)
         {
             return firestore.InsertSubscription(subscription);
         }
 
-        public Task<IList<Subscription>> ReadSubscriptions()
+        public static Task<IList<Subscription>> ReadSubscriptions()
         {
             return firestore.ReadSubscriptions();
         }
 
-        public Task<bool> UpdateSubscription(Subscription subscription)
+        public static Task<bool> UpdateSubscription(Subscription subscription)
         {
             return firestore.UpdateSubscription(subscription);
         }

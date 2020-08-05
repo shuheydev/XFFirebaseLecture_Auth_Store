@@ -20,7 +20,7 @@ namespace XFFirebaseLecture_Auth_Store.ViewModels.Helpers
     /// </summary>
     public class Auth
     {
-        private static IAuth auth = DependencyService.Get<IAuth>();
+        private static readonly IAuth auth = DependencyService.Get<IAuth>();
 
         public static async Task<bool> RegisterUser(string name, string email, string password)
         {
