@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace XFFirebaseLecture_Auth_Store.ViewModels.Helpers
 {
@@ -18,15 +19,32 @@ namespace XFFirebaseLecture_Auth_Store.ViewModels.Helpers
     /// </summary>
     public class Auth
     {
-        private static IAuth auth;
-        public static async Task< bool> RegisterUser(string name, string email, string password)
+        private static IAuth auth = DependencyService.Get<IAuth>();
+
+        public static async Task<bool> RegisterUser(string name, string email, string password)
         {
-            return await auth.RegisterUser(name, email, password);
+            try
+            {
+                return await auth.RegisterUser(name, email, password);
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                return false;
+            }
         }
 
-        public static async Task<bool> AuthenticateaUser( string email, string password)
+        public static async Task<bool> AuthenticateUser(string email, string password)
         {
-            return await auth.AuthenticateUser(email, password);
+            try
+            {
+                return await auth.AuthenticateUser(email, password);
+            }
+            catch (Exception ex)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                return false;
+            }
         }
 
         public static bool IsAuthenticated()
