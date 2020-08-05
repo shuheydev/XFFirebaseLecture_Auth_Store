@@ -5,10 +5,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:XFFirebaseLecture_Auth_Store.ViewModels"
     Title="My subscriptions"
     mc:Ignorable="d">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:SubscriptionsViewModel x:Key="vm" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Clicked="ToolbarItem_Clicked"/>
+        <ToolbarItem Clicked="ToolbarItem_Clicked" Text="Add" />
     </ContentPage.ToolbarItems>
+
+    <ListView ItemsSource="{Binding Source={StaticResource vm}, Path=Subscriptions}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Detail="{Binding SubscribedDate}" Text="{Binding Name}" />
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

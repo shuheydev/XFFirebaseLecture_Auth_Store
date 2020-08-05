@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XFFirebaseLecture_Auth_Store.ViewModels;
 using XFFirebaseLecture_Auth_Store.ViewModels.Helpers;
 
 namespace XFFirebaseLecture_Auth_Store.Views
@@ -13,9 +14,13 @@ namespace XFFirebaseLecture_Auth_Store.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SubscriptionsPage : ContentPage
     {
+        SubscriptionsViewModel vm;
+
         public SubscriptionsPage()
         {
             InitializeComponent();
+
+            vm = Resources["vm"] as SubscriptionsViewModel;
         }
 
         protected override async void OnAppearing()
@@ -26,6 +31,10 @@ namespace XFFirebaseLecture_Auth_Store.Views
             {
                 await Task.Delay(300);
                 await Navigation.PushAsync(new LoginPage());
+            }
+            else
+            {
+                await vm.ReadSubscriptions();
             }
         }
 
