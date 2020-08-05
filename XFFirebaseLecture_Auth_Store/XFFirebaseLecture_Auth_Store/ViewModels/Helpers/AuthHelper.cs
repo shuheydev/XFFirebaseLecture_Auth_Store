@@ -15,7 +15,8 @@ namespace XFFirebaseLecture_Auth_Store.ViewModels.Helpers
     }
 
     /// <summary>
-    /// DIの必要性の説明のために作ったのかな?
+    /// エラーハンドリングを含めてLogin,Registerに関する処理をまとめて
+    /// 使いやすくするために作ったヘルパー
     /// </summary>
     public class Auth
     {

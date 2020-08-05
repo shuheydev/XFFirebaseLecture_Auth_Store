@@ -102,13 +102,21 @@ namespace XFFirebaseLecture_Auth_Store.ViewModels
             }
             else
             {
-                await Auth.RegisterUser(this.Name, this.Email, this.Password);
+                bool result = await Auth.RegisterUser(this.Name, this.Email, this.Password);
+                if (result)
+                {
+                    await App.Current.MainPage.Navigation.PopAsync();
+                }
             }
         }
 
         private async void Login(object parameter)
         {
-            await Auth.AuthenticateUser(Email, Password);
+            bool result = await Auth.AuthenticateUser(Email, Password);
+            if (result)
+            {
+                await App.Current.MainPage.Navigation.PopAsync();
+            }
         }
 
         private bool LoginCanExecute(object parameter)
