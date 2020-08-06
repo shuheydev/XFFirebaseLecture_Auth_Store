@@ -34,7 +34,17 @@ namespace XFFirebaseLecture_Auth_Store.Droid.Dependencies
 
         public async Task<bool> DeleteSubscription(Subscription subscription)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var collection = Firebase.Firestore.FirebaseFirestore.Instance.Collection("subscriptions");
+                collection.Document(subscription.Id).Delete();
+
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
 
         public bool InsertSubscription(Subscription subscription)
