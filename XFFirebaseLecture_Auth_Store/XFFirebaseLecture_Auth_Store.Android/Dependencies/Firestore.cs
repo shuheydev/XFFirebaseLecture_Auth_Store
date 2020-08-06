@@ -24,15 +24,15 @@ namespace XFFirebaseLecture_Auth_Store.Droid.Dependencies
 {
     public class Firestore : Java.Lang.Object, IFirestore, IOnCompleteListener
     {
-        List<Subscription> subscriptions;
-        bool hasReadSubscriptions = false;
+        List<Subscription> _subscriptions;
+        bool _hasReadSubscriptions = false;
 
         public Firestore()
         {
-            subscriptions = new List<Subscription>();
+            _subscriptions = new List<Subscription>();
         }
 
-        public Task<bool> DeleteSubscription(Subscription subscription)
+        public async Task<bool> DeleteSubscription(Subscription subscription)
         {
             throw new NotImplementedException();
         }
@@ -61,7 +61,7 @@ namespace XFFirebaseLecture_Auth_Store.Droid.Dependencies
 
         public async Task<IList<Subscription>> ReadSubscriptions()
         {
-            hasReadSubscriptions = false;
+            _hasReadSubscriptions = false;
 
             var collection = Firebase.Firestore.FirebaseFirestore.Instance.Collection("subscriptions");
             var query = collection.WhereEqualTo("author", Firebase.Auth.FirebaseAuth.Instance.CurrentUser.Uid);
@@ -70,18 +70,30 @@ namespace XFFirebaseLecture_Auth_Store.Droid.Dependencies
             for (int i = 0; i < 25; i++)
             {
                 await System.Threading.Tasks.Task.Delay(100);
-                if (hasReadSubscriptions)
+                if (_hasReadSubscriptions)
                 {
                     break;
                 }
             }
 
-            return subscriptions;
+            return _subscriptions;
         }
 
-        public Task<bool> UpdateSubscription(Subscription subscription)
+        public async Task<bool> UpdateSubscription(Subscription subscription)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var collection = Firebase.Firestore.FirebaseFirestore.Instance.Collection("subscriptions");
+                collection.Document(subscription.Id).Update("name",
+                                                            subscription.Name,
+                                                            "isActive",
+                                                            subscription.IsActive);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
         }
 
         private static Date DateDateTimeToNativeDate(DateTimeOffset date)
@@ -104,7 +116,7 @@ namespace XFFirebaseLecture_Auth_Store.Droid.Dependencies
             {
                 var documents = (QuerySnapshot)task.Result;
 
-                subscriptions.Clear();
+                _subscriptions.Clear();
                 foreach (var doc in documents.Documents)
                 {
                     Subscription subscription = new Subscription
@@ -113,17 +125,18 @@ namespace XFFirebaseLecture_Auth_Store.Droid.Dependencies
                         Name = doc.Get("name").ToString(),
                         UserId = doc.Get("author").ToString(),
                         SubscribedDate = NativeDateToDateTime(doc.Get("subscribedDate") as Date),
+                        Id = doc.Id,
                     };
 
-                    subscriptions.Add(subscription);
+                    _subscriptions.Add(subscription);
                 }
             }
             else
             {
-                subscriptions.Clear();
+                _subscriptions.Clear();
             }
 
-            hasReadSubscriptions = true;
+            _hasReadSubscriptions = true;
         }
     }
 }

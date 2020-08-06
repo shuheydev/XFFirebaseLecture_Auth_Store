@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XFFirebaseLecture_Auth_Store.Models;
@@ -66,14 +67,30 @@ namespace XFFirebaseLecture_Auth_Store.ViewModels
             return !string.IsNullOrEmpty(this.Name);
         }
 
-        private void Update(object parameter)
+        private async void Update(object parameter)
         {
-            DatabaseHelper.UpdateSubscription(this.Subscription);
+            bool result = await DatabaseHelper.UpdateSubscription(this.Subscription);
+            if (result)
+            {
+                await App.Current.MainPage.Navigation.PopAsync();
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "There was an error, please try again.", "OK");
+            }
         }
 
-        private void Delete(object parameter)
+        private async void Delete(object parameter)
         {
-            DatabaseHelper.DeleteSubscription(this.Subscription);
+            bool result = await DatabaseHelper.DeleteSubscription(this.Subscription);
+            if(result)
+            {
+                await App.Current.MainPage.Navigation.PopAsync();
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "There was an error, please try again.", "OK");
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
