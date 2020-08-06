@@ -21,6 +21,8 @@ namespace XFFirebaseLecture_Auth_Store.ViewModels
 
         public async Task ReadSubscriptions()
         {
+            Subscriptions.Clear();
+
             var subscriptions = await DatabaseHelper.ReadSubscriptions();
 
             foreach (var s in subscriptions)

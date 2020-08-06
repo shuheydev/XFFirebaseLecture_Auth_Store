@@ -48,13 +48,22 @@ namespace XFFirebaseLecture_Auth_Store.ViewModels
 
         private void SaveSubscription(object parameter)
         {
-            DatabaseHelper.InsertSubscription(new Subscription
+            bool result = DatabaseHelper.InsertSubscription(new Subscription
             {
                 IsActive = this.IsActive,
                 Name = this.Name,
                 UserId = Auth.GetCurrentUserId(),
                 SubscribedDate = DateTime.Now,
             });
+
+            if (result)
+            {
+                App.Current.MainPage.Navigation.PopAsync();
+            }
+            else
+            {
+                App.Current.MainPage.DisplayAlert("Error", "Something went wrong, please try again.", "OK");
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
