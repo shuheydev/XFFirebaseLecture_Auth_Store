@@ -22,8 +22,8 @@
     <StackLayout Margin="16" BindingContext="{StaticResource vm}">
         <Entry Placeholder="Subscription Name" Text="{Binding Name, Mode=TwoWay}" />
         <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-            <Label Text="Is this subscription still active?" VerticalOptions="Center" />
             <CheckBox IsChecked="{Binding IsActive, Mode=TwoWay}" />
+            <Label Text="Is this subscription still active?" VerticalOptions="Center" />
         </StackLayout>
         <Button
             Command="{Binding DeleteCommand}"
